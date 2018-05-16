@@ -22,12 +22,14 @@ public class gatchaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Random r= new Random();
-		int a=r.nextInt(10);
+		ArrayList<GatchaBeans> al=new ArrayList<GatchaBeans>();
+
 		GatchaDAO gd=new GatchaDAO();
 
 		try {
-			ArrayList<GatchaBeans> al=gd.gatcha( );
-			System.out.println(a);
+			al=gd.gatcha( );
+			int a=r.nextInt(al.size());
+
 			al.get(a);
 			String NAME=al.get(a).getName();
 			int STAR=al.get(a).getStar();

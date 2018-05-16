@@ -19,6 +19,7 @@ public class MasterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String log=request.getParameter("log");
+		FindDAO fd=new FindDAO();
 		if(log.equals("login")) {
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
@@ -33,6 +34,8 @@ public class MasterServlet extends HttpServlet {
 			if(name.equals(NAME)&&pass.equals(PASS)) {
 			HttpSession hs=request.getSession();
 			hs.setAttribute("NAME", NAME);
+			ArrayList<GatchaBeans> ad=fd.findAll();
+			request.setAttribute("list", ad);
 			RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 			rd.forward(request, response);
 			}else {

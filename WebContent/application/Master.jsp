@@ -16,8 +16,10 @@ request.getAttribute("message");
 <input type ="submit" value="ログイン"/><br>
 <input type="hidden" name="log" value="login"/>
 <br><br>
-${message}
+${message}<br><br>
 
+<a href="/appli/application/gatcha.jsp">ガチャに戻る</a>
+<br><br>
 <a href="/appli/MasterServlet?log=logout">ログアウトはこちら</a>
 
 </form>

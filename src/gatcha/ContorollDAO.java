@@ -10,19 +10,7 @@ public class ContorollDAO {
 	Connection con;
 	PreparedStatement st=null;
 	ResultSet rs=null;
-	public void findAll(String name,int star)  {
-		connect();
-		String sql="SELECT * FROM cha";
-		try {
-			st=con.prepareStatement(sql);
-			rs=st.executeQuery();
-			ArrayList<GatchaBeans> al=new ArrayList<GatchaBeans> a();S
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
 
-	}
 	public int add(String name,int star) {
 		connect();
 		String sql="INSERT INTO cha(name,star) values(?,?)";
@@ -37,7 +25,7 @@ public class ContorollDAO {
 			e.printStackTrace();
 			return 0;
 		}
-	}
+		}
 
 	public int update(String name,int star,int id) {
 		connect();
@@ -56,13 +44,13 @@ public class ContorollDAO {
 		}
 	}
 
-	public int delete(String name,int star) {
+	public int delete(int id) {
 		connect();
-		String sql="DELETE FROM cha WHERE name=? AND star=?";
+		String sql="DELETE FROM cha WHERE id=?";
 		try {
 			st=con.prepareStatement(sql);
-			st.setString(1, name);
-			st.setInt(2, star);
+			st.setInt(1, id);
+
 			int rows=st.executeUpdate();
 			return rows;
 		} catch (SQLException e) {
@@ -87,5 +75,19 @@ public class ContorollDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void close() {
+		try {
+			if(rs!=null)
+			rs.close();
+			if(st!=null)
+			st.close();
+			if(con!=null)
+			con.close();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 }
