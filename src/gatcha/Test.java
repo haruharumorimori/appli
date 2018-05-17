@@ -8,6 +8,7 @@ class Test {
 		dc.findAll();
 		ContorollDAO cd=new ContorollDAO();
 		cd.add(null, 0);
+		cd.delete(0);
 	}
 
 }

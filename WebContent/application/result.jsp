@@ -8,22 +8,22 @@ int a=(Integer) request.getAttribute("STAR1");
 %>
 <% switch(a){
 case 1:
-	message="はい";
+	message="ざーんねん";
 	break;
 case 2:
-	message="爆死";
+	message="微妙";
 	break;
 case 3:
-	message="ノーマル";
+	message="まあまあ";
 	break;
 case 4:
-	message="激レア";
+	message="やったね";
 	break;
 case 5:
-	message="超激レア";
+	message="おめでとう";
 	break;
 default:
-	message="???";
+	message="開発者もびっくり";
 	break;
 }
 %>
@@ -34,25 +34,36 @@ default:
 <title>Insert title here</title>
 </head>
 <body>
-<h1><font color="red"><%=message %></font></h1><br>
+<h1>あなたの来世評価：<font color="red"><%=message %></font></h1><br>
 <%if(a==1){ %>
-<body background="/appli/imge/tatyannka.jpg" />
+<img src="/appli/imge/note_kurorekishi.png"width="240" height="240" />
+<body bgcolor="#FF66FF"/>
 <%}else if(a==2){ %>
-<img src="/appli/imge/bakudan_hatsugen_man.png" width="240" height="240" />
+<img src="/appli/imge/sns_nakamahazure_man.png" width="240" height="240" />
+<body bgcolor="#FFFF66"/>
 <%}else if(a==3){ %>
-<img src="/appli/imge/internet_f5_attack.png" width="240" height="240"/>
+<img src="/appli/imge/teinen_slowlife.png" width="240" height="240"/>
+<body bgcolor="orange"/>
 <%}else if(a==4){ %>
-<img src="/appli/imge/character_cthulhu_nyarlathotep.png" width="240" height="240"/>
+<img src="/appli/imge/happy_family.png" width="240" height="240"/>
+<body bgcolor="skyblue"/>
 <%}else if(a==5){ %>
-<img src="/appli/imge/business_man_macho.png" width="240" height="240"/>
+<img src="/appli/imge/wedding_syukufuku.png" width="240" height="240"/>
+<body bgcolor="lightgreen"/>
+<%} else{%>
+<img src="/appli/imge/hqdefault.jpg"width="380"height="380">
 <%} %>
 <h1><font color="green">${name1}</font></h1>
 <h1><font color="gold">★${STAR1}</font></h1><br>
 
-<font color="green">これが今回の結果です</font>
+<h3><font color="black">これが今回の結果です</font></h3>
 
 <br>
 
-<a href="/appli/application/gatcha.jsp">もう一度引く</a>
+<a href="/appli/gatchaServlet">もう一度引く</a>
+<br><br>
+<a href="/appli/application/gatcha.jsp">もう一度ガチャボタン押したい！</a>
+<br><br>
+<a href="/appli/application/Master.jsp">管理者用アクセス</a>
 </body>
 </html>

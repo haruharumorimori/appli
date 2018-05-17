@@ -23,14 +23,20 @@ public class ContorollServlet extends HttpServlet {
 
 		String action=request.getParameter("action");
 		if(action.equals("add")) {
-			String name=request.getParameter("name");
-			String star=request.getParameter("star");
-			if(name.equals(null)||star.equals(null)) {
+			String name=null;
+			String star=null;
+			int s=0;
+			name=request.getParameter("name");
+			star=request.getParameter("star");
+
+			try{
+				s=Integer.parseInt(star);
+			}catch(NumberFormatException e) {
 				request.setAttribute("message", "ERRORです。");
 				RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 				rd.forward(request, response);
 			}
-			int s=Integer.parseInt(star);
+
 			int rows=cd.add(name, s);
 			request.setAttribute("message", rows+"件追加いたしました");
 			ArrayList<GatchaBeans> ad=fd.findAll();
@@ -43,14 +49,18 @@ public class ContorollServlet extends HttpServlet {
 			String ID=request.getParameter("id");
 			String name=request.getParameter("name");
 			String star=request.getParameter("star");
-			if(ID.equals(null)||name.equals(null)||star.equals(null)) {
+			int s=0;
+			int id=0;
+			try{
+				s=Integer.parseInt(star);
+				id=Integer.parseInt(ID);
+			}catch(NumberFormatException e) {
 				request.setAttribute("message", "ERRORです。");
 				RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 				rd.forward(request, response);
 			}
-			int s=Integer.parseInt(star);
-			int id=Integer.parseInt(ID);
-			int rows=cd.update(name, s, id);
+				int rows=cd.update(name, s, id);
+
 			ArrayList<GatchaBeans> ad=fd.findAll();
 
 			request.setAttribute("list", ad);
@@ -60,12 +70,14 @@ public class ContorollServlet extends HttpServlet {
 
 		}else if(action.equals("delete")){
 			String id=request.getParameter("id");
-			if(id.equals(null)) {
+			int s=0;
+			try{
+				s=Integer.parseInt(id);
+			}catch(NumberFormatException e) {
 				request.setAttribute("message", "ERRORです。");
 				RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 				rd.forward(request, response);
 			}
-			int s=Integer.parseInt(id);
 			int rows=cd.delete(s);
 			request.setAttribute("message", rows+"件削除いたしました");
 			ArrayList<GatchaBeans> ad=fd.findAll();
@@ -75,7 +87,7 @@ public class ContorollServlet extends HttpServlet {
 			RequestDispatcher rs=request.getRequestDispatcher("/application/login.jsp");
 			rs.forward(request,response);
 		}
-		}
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
