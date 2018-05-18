@@ -2,7 +2,6 @@ package gatcha;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,40 +12,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/gatchaServlet")
-public class gatchaServlet extends HttpServlet {
+@WebServlet("/RecordServlet")
+public class RecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-
-
-
+	String NAME;
+	String PASS;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Random r= new Random();
-		ArrayList<GatchaBeans> al=new ArrayList<GatchaBeans>();
+	String record=request.getParameter("record");
+	RecordDAO rd=new RecordDAO();
 
-		GatchaDAO gd=new GatchaDAO();
+	if(record.equals("login")) {
+		String name=request.getParameter("name");
+		String pass=request.getParameter("pass");
+		//データベースの情報をアレイリストに格納
+		ArrayList<RecordBean> al=rd.findAll(name,pass);
+		//アレイリスト内の名前、パスワードを取り出す
+			NAME=al.get(0).getName();
+			PASS=al.get(0).getPass();
 
-		try {
-			al=gd.gatcha( );
-			int a=r.nextInt(al.size());
-
-			al.get(a);
-			String NAME=al.get(a).getName();
-			int STAR=al.get(a).getStar();
-
-			request.setAttribute("name1", NAME);
-			request.setAttribute("STAR1", STAR);
-			RequestDispatcher rd=request.getRequestDispatcher("/application/result.jsp");
-			rd.forward(request, response);
+		if(name.equals(NAME)&&pass.equals(PASS)) {//打ち込まれたものとデータべ＾スの情報を照合
+			//セッション処理
 			HttpSession hs=request.getSession();
-			hs.setAttribute("name3", NAME);
-			hs.setAttribute("STAR3", STAR);
-			RequestDispatcher ra=request.getRequestDispatcher("/application/recorded.jsp");
-			ra.forward(request, response);
-		} catch (DAOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+			hs.setAttribute("name",name);
+			RequestDispatcher rp=request.getRequestDispatcher("/application/recorded.jsp");
+			rp.forward(request, response);
+			}
 		}
 	}
 

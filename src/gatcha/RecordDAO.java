@@ -7,32 +7,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MasterDAO {
-	PreparedStatement st=null;
-	ResultSet rs=null;
-	Connection con;
-	public ArrayList<MasterBean> findALL(String name,String pass){
+public class RecordDAO {
+	public ArrayList<RecordBean> findAll(String name,String pass){
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url="jdbc:mysql://localhost/sample2?serverTimezone=UTC";
-			String user="student";
-			String pa="himitu";
+			String user="root";
+			String pa="sht30";
 			con=DriverManager.getConnection(url,user,pa);
-			String sql="SELECT * FROM user WHERE name=? AND pass=?";
-			st=con.prepareStatement(sql);
-			st.setString(1, name);
-			st.setString(2, pass);
-
-			rs=st.executeQuery();
-			ArrayList<MasterBean> al=new ArrayList<MasterBean>();
-
-			while(rs.next()) {//データべース情報をアレイリストに格納
+			String sql="SELECT * FROM user2 WHERE name=? AND pass=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, pass);
+			rs=ps.executeQuery();
+			ArrayList<RecordBean> al=new ArrayList<RecordBean>();
+			while(rs.next()) {
 				String NAME=rs.getString("name");
 				String PASS=rs.getString("pass");
-				//JAVABEANSインスタンス化
-				MasterBean mb=new MasterBean(NAME,PASS);
-				//アレイリストに追加
-				al.add(mb);
+				int STONE=rs.getInt("STONE");
+				RecordBean rb=new RecordBean(NAME,PASS,STONE);
+				al.add(rb);
 			}
 			return al;
 		} catch (ClassNotFoundException e) {
@@ -44,17 +41,17 @@ public class MasterDAO {
 			e.printStackTrace();
 			return null;
 		}finally {
-			if(rs!=null||st!=null||con!=null) {
-				try {//メモリ圧迫回避
+			if(rs!=null||ps!=null||con!=null)
+				try {
 					rs.close();
-					st.close();
+					ps.close();
 					con.close();
 				} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
-			}
 		}
+
 
 	}
 }

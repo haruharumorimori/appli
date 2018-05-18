@@ -21,29 +21,37 @@ public class MasterServlet extends HttpServlet {
 		String log=request.getParameter("log");
 		FindDAO fd=new FindDAO();
 		if(log.equals("login")) {
+			//パラメータ取得
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
+			//初期化（インスタンス変数にすればしなくてよかったので間抜け）
 			String NAME=null;
 			String PASS=null;
 			MasterDAO md=new MasterDAO();
+			//アレイリスト作成とともにデータベースの情報取得
 			ArrayList<MasterBean> al=md.findALL(name, pass);
 			for(MasterBean a:al) {
+				//代入
 				NAME=a.getName();
 				PASS=a.getPass();
 			}
+
 			if(name.equals(NAME)&&pass.equals(PASS)) {
-			HttpSession hs=request.getSession();
-			hs.setAttribute("NAME", NAME);
-			ArrayList<GatchaBeans> ad=fd.findAll();
-			request.setAttribute("list", ad);
-			RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
-			rd.forward(request, response);
+				//セッション処理
+				HttpSession hs=request.getSession();
+				hs.setAttribute("NAME", NAME);
+				ArrayList<GatchaBeans> ad=fd.findAll();
+				request.setAttribute("list", ad);
+				RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
+				rd.forward(request, response);
 			}else {
-			request.setAttribute("message", "パスワードが違います");
-			RequestDispatcher rd=request.getRequestDispatcher("/application/Master.jsp");
-			rd.forward(request, response);
+				//パスワード、名前が違うとき
+				request.setAttribute("message", "パスワードが違います");
+				RequestDispatcher rd=request.getRequestDispatcher("/application/Master.jsp");
+				rd.forward(request, response);
 			}
 		}else if(log.equals("logout")) {
+			//ログアウト
 			HttpSession hs=request.getSession(false);
 			if(hs!=null) {
 				hs.invalidate();

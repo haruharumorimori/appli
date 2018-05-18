@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
 String message;
 request.getAttribute("name1");
@@ -60,13 +59,9 @@ default:
 
 <br>
 <br>
-<a href="/appli/application/record.jsp">記録する方はこちら</a>
-<br>
-<br>
-<a href="/appli/gatchaServlet">もう一度引く</a>
+<a href="/appli/PremiumrecordedServlet">記録</a><br><br>
+<a href="/appli/PremiumGatchaServlet">もう一度プレミアム</a>
 <br><br>
-<a href="/appli/application/gatcha.jsp">もう一度ガチャボタン押したい！</a>
-<br><br>
-<a href="/appli/application/Master.jsp">管理者用アクセス</a>
+<a href="/appli/application/gatcha.jsp">トップへ</a>
 </body>
 </html>
