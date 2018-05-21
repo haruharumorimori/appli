@@ -28,7 +28,7 @@ public class PremiumGatchaServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		RecordDAO rd=new RecordDAO();
-		GatchaDAO gd=new GatchaDAO();
+		PremiumGtachaDAO pgd=new PremiumGtachaDAO();
 		StoneDAO sd=new StoneDAO();
 		HttpSession hs=request.getSession();
 		//セッションに入っている名前、パスワードを取り出す
@@ -42,6 +42,7 @@ public class PremiumGatchaServlet extends HttpServlet {
 		//石の数による吟味
 		if(stone<10) {
 			request.setAttribute("message", "石が足りません");
+			request.setAttribute("stone", stone);
 			RequestDispatcher ra=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
 			ra.forward(request, response);
 		}else if(stone>=10) {
@@ -50,14 +51,15 @@ public class PremiumGatchaServlet extends HttpServlet {
 				sd.decrease(name);
 				int STAR=0;
 				String NAME=null;
-				ArrayList<GatchaBeans> as=gd.pgatcha();
+				ArrayList<PremiumGatchaBeans> az=pgd.pgatcha();
 				Random r=new Random();
-				int a=r.nextInt(as.size());
-				NAME=as.get(a).getName();
-				STAR=as.get(a).getStar();
+				int a=r.nextInt(az.size());
+				NAME=az.get(a).getName();
+				STAR=az.get(a).getStar();
 				//排出したものをJSPに飛ばす。
-				request.setAttribute("name1", NAME);
-				request.setAttribute("STAR1", STAR);
+				request.setAttribute("premiumname1", NAME);
+				request.setAttribute("premiumSTAR1", STAR);
+
 				RequestDispatcher sa=request.getRequestDispatcher("/application/PremiumGatchaResult.jsp");
 				sa.forward(request, response);
 				hs.setAttribute("name3", NAME);

@@ -21,6 +21,8 @@ public class PremiumServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		//Hiddenパラメータ取得
 		String record=request.getParameter("record");
 		//下準備
@@ -43,14 +45,14 @@ public class PremiumServlet extends HttpServlet {
 				sd.add(name);
 				ArrayList<RecordBean> ar=sd.find(name);
 				int stone=ar.get(0).getStone();
-				hs.setAttribute("stone", stone);
+				request.setAttribute("stone", stone);
 				hs.setAttribute("name",name);
 				hs.setAttribute("pass", pass);
 				RequestDispatcher rp=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
 				rp.forward(request, response);
 			}else {//違うとき
 				request.setAttribute("message", "ログイン失敗");
-				RequestDispatcher rp=request.getRequestDispatcher("/application/record.jsp");
+				RequestDispatcher rp=request.getRequestDispatcher("/application/premium.jsp");
 				rp.forward(request, response);
 			}
 		}else if(record.equals("Logout")) {

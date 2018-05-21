@@ -8,7 +8,7 @@ String s=(String)session.getAttribute("name");
  <jsp:forward page="/application/premium.jsp"/>
  <%} %>
  <%
- session.getAttribute("stone");
+ request.getAttribute("stone");
  request.getAttribute("message");
  %>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ String s=(String)session.getAttribute("name");
 <body>
 <h1>💰${name }様！ようこそ！💰</h1>
 <h2>あなたの残り石数は${stone}です。</h2>
-<br>${message}<br>
+<br><h3 class="z">${message}</h3><br>
 <form action="/appli/PremiumGatchaServlet" method="post">
 <input type="submit" value="★３確定！プレミアムガチャを引く" class="a"/>
 </form>

@@ -46,7 +46,7 @@ public class StoneDAO {
 	}
 	public int add(String name) {
 		connect();
-		String sql="UPDATE user2 SET stone=stone+10 WHERE name=?";
+		String sql="UPDATE user2 SET stone=stone+200 WHERE name=?";
 		try {
 			st=con.prepareStatement(sql);
 			st.setString(1, name);

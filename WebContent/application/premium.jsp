@@ -18,6 +18,8 @@ ${message}
 <input type="submit" value="login"/>
 </form>
 <br><br><br>
+<a href="/appli/application/New.jsp">新規登録はこちら</a>
+<br><br><br>
 <a href="/appli/application/gatcha.jsp">トップへ</a>
 </body>
 </html>
