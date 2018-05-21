@@ -50,18 +50,11 @@ public class PremiumGatchaServlet extends HttpServlet {
 				sd.decrease(name);
 				int STAR=0;
 				String NAME=null;
-				ArrayList<GatchaBeans> as=gd.gatcha();
+				ArrayList<GatchaBeans> as=gd.pgatcha();
 				Random r=new Random();
 				int a=r.nextInt(as.size());
-				boolean z=true;
-				while(z) {//レアリティ３以上が出るまで繰り返し
-					NAME=as.get(a).getName();
-					STAR=as.get(a).getStar();
-					if(STAR>=3) {
-						z=false;
-					}
-
-				}
+				NAME=as.get(a).getName();
+				STAR=as.get(a).getStar();
 				//排出したものをJSPに飛ばす。
 				request.setAttribute("name1", NAME);
 				request.setAttribute("STAR1", STAR);

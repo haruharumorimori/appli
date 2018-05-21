@@ -33,6 +33,15 @@ public class StoneDAO {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return null;
+		}finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 	}
 	public int add(String name) {
@@ -47,6 +56,18 @@ public class StoneDAO {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return 0;
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(st!=null)
+					st.close();
+				if(con!=null)
+					con.close();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -57,11 +78,25 @@ public class StoneDAO {
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			rows=st.executeUpdate();
+			return rows;
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+				if(st!=null)
+					st.close();
+				if(con!=null)
+					con.close();
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
-		return rows;
+
 	}
 	public void connect() {
 		try {
