@@ -20,7 +20,7 @@ ${message}<br><br>
 
 <a href="/appli/application/gatcha.jsp">ガチャに戻る</a>
 <br><br>
-<a href="/appli/MasterServlet?log=logout">ログアウトはこちら</a>
+
 
 </form>
 </body>

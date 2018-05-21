@@ -1,7 +1,6 @@
 package gatcha;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,22 +29,25 @@ public class PremiumGatchaServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		RecordDAO rd=new RecordDAO();
 		GatchaDAO gd=new GatchaDAO();
+		StoneDAO sd=new StoneDAO();
 		HttpSession hs=request.getSession();
 		//セッションに入っている名前、パスワードを取り出す
 		String name=(String)hs.getAttribute("name");
 		String pass=(String)hs.getAttribute("pass");
-		PrintWriter out=response.getWriter();
+
 		//アレイリスト作成
 		ArrayList<RecordBean> al=rd.findAll(name,pass);
 		//アレイリスト内の石情報獲得
 		int stone=al.get(0).getStone();
 		//石の数による吟味
 		if(stone<10) {
-			out.println("<html><head><title></title></head><body>");
-			out.println("石が足りません");
-			out.println("</body></html>");
+			request.setAttribute("message", "石が足りません");
+			RequestDispatcher ra=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
+			ra.forward(request, response);
 		}else if(stone>=10) {
+
 			try {//ガチャスタート
+				sd.decrease(name);
 				int STAR=0;
 				String NAME=null;
 				ArrayList<GatchaBeans> as=gd.gatcha();

@@ -47,5 +47,7 @@ ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]
 </c:forEach>
 </table><br><br>
 <a href="/appli/application/gatcha.jsp">ガチャに戻る</a>
+<br><br>
+<a href="/appli/MasterServlet?log=logout">ログアウトはこちら</a>
 </body>
 </html>

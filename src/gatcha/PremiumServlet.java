@@ -26,6 +26,7 @@ public class PremiumServlet extends HttpServlet {
 		//下準備
 		String NAME=null;
 		String PASS=null;
+		StoneDAO sd=new StoneDAO();
 		RecordDAO rd=new RecordDAO();
 		if(record.equals("login")) {
 			//パラメータ取得とともにデータベースと照合
@@ -39,6 +40,10 @@ public class PremiumServlet extends HttpServlet {
 			if(name.equals(NAME)&&pass.equals(PASS)) {
 				//セッション処理
 				HttpSession hs=request.getSession();
+				sd.add(name);
+				ArrayList<RecordBean> ar=sd.find(name);
+				int stone=ar.get(0).getStone();
+				hs.setAttribute("stone", stone);
 				hs.setAttribute("name",name);
 				hs.setAttribute("pass", pass);
 				RequestDispatcher rp=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
@@ -47,6 +52,18 @@ public class PremiumServlet extends HttpServlet {
 				request.setAttribute("message", "ログイン失敗");
 				RequestDispatcher rp=request.getRequestDispatcher("/application/record.jsp");
 				rp.forward(request, response);
+			}
+		}else if(record.equals("Logout")) {
+			HttpSession hs=request.getSession(false);
+			if(hs==null) {
+				request.setAttribute("message", "ログアウトしました");
+				RequestDispatcher rs=request.getRequestDispatcher("/application/premium.jsp");
+				rs.forward(request, response);
+			}else if(hs!=null) {
+				hs.invalidate();
+				request.setAttribute("message", "ログアウトしました");
+				RequestDispatcher rs=request.getRequestDispatcher("/application/premium.jsp");
+				rs.forward(request, response);
 			}
 		}
 	}

@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-session.getAttribute("name");
-session.getAttribute("name2");
+String s=(String)session.getAttribute("name");
+String a=(String)session.getAttribute("name2");
+String b=(String)session.getAttribute("name3");
+%>
+<%if(s==null&&a==null&&b==null){ %>
+<jsp:forward page="/application/record.jsp"/>
+<%} %>
+<%
 session.getAttribute("STAR2");
-session.getAttribute("name3");
 session.getAttribute("STAR3");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -20,5 +24,7 @@ session.getAttribute("STAR3");
 <h1>★${STAR2}${STAR3}</h1>
 
 <a href="/appli/application/gatcha.jsp">トップへ</a>
+
+<a href="/appli/RecordServlet?record=Logout">ログアウト</a>
 </body>
 </html>

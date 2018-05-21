@@ -37,9 +37,26 @@ public class RecordServlet extends HttpServlet {
 			hs.setAttribute("name",name);
 			RequestDispatcher rp=request.getRequestDispatcher("/application/recorded.jsp");
 			rp.forward(request, response);
-			}
+		}else {
+			request.setAttribute("message", "ログイン失敗");
+			RequestDispatcher rp=request.getRequestDispatcher("/application/record.jsp");
+			rp.forward(request, response);
+		}
+	} else if(record.equals("Logout")) {
+		//ログアウトの一連のやつ
+		HttpSession hs=request.getSession(false);
+		if(hs==null) {
+			request.setAttribute("message", "ログアウトしました");
+			RequestDispatcher rs=request.getRequestDispatcher("/application/record.jsp");
+			rs.forward(request, response);
+		}else if(hs!=null){
+			hs.invalidate();
+			request.setAttribute("message", "ログアウトしました");
+			RequestDispatcher rs=request.getRequestDispatcher("/application/record.jsp");
+			rs.forward(request, response);
 		}
 	}
+}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

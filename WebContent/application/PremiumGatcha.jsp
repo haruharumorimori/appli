@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%
- session.getAttribute("name");
+String s=(String)session.getAttribute("name");
+ %>
+ <%if(s==null){ %>
+ <jsp:forward page="/application/premium.jsp"/>
+ <%} %>
+ <%
+ session.getAttribute("stone");
+ request.getAttribute("message");
  %>
 <!DOCTYPE html>
 <html>
@@ -13,12 +21,18 @@
 </head>
 <body>
 <h1>💰${name }様！ようこそ！💰</h1>
+<h2>あなたの残り石数は${stone}です。</h2>
+<br>${message}<br>
 <form action="/appli/PremiumGatchaServlet" method="post">
 <input type="submit" value="★３確定！プレミアムガチャを引く" class="a"/>
-
-<br>
-
 </form>
+<br><br>
+<form action="/appli/gatchaServlet"method="post">
+<input type ="submit"value ="ガチャを引く" class="a"/>
+</form>
+<br>
+<br>
+<a href="/appli/PremiumServlet?record=Logout">ログアウト</a>
 
 </body>
 </html>

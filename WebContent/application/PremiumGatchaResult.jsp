@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String message;
-request.getAttribute("name1");
-int a=(Integer) request.getAttribute("STAR1");
+String s=(String)request.getAttribute("name1");
 %>
+<%if(s==null){ %>
+<jsp:forward page="/application/PremiumGatcha.jsp"/>
+<%} %>
+<%int a=(Integer) request.getAttribute("STAR1"); %>
 <% switch(a){
 case 1:
 	message="ざーんねん";
@@ -62,6 +66,7 @@ default:
 <a href="/appli/PremiumrecordedServlet">記録</a><br><br>
 <a href="/appli/PremiumGatchaServlet">もう一度プレミアム</a>
 <br><br>
-<a href="/appli/application/gatcha.jsp">トップへ</a>
+<a href="/appli/application/gatcha.jsp">トップへ</a><br><br>
+<a href="/appli/PremiumServlet">ログアウト</a>
 </body>
 </html>

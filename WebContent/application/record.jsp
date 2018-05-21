@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/appli/application/c.css" type="text/css"/>
 </head>
 <body>
 ${message}
@@ -18,5 +19,9 @@ ${message}
 <input type="submit" value="login"/>
 <input type="hidden" name="record" value="login"/>
 </form>
+<br><br>
+<a href="/appli/application/gatcha.jsp">戻る</a>
+
+
 </body>
 </html>
