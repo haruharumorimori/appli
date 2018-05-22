@@ -21,6 +21,8 @@
 <a href="/appli/application/record.jsp">記録を見る</a>
 <br><br>
 <a href="/appli/application/Master.jsp">管理者はこちら</a>
+<br><br>
+<a href="/appli/application/delete.jsp">退会はコチラ</a>
 
 </body>
 </html>

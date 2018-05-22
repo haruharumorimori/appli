@@ -16,8 +16,10 @@ class test1 {
 		sample s=new sample();
 		assertNotSame(s.a(),s.b());
 		assertNotEquals(s.f(),s.e());
+		MasterDAO md=new MasterDAO();
+		md.findALL("kakaka", "kakakakakakakakakakakkak");
 
-	
+
 
 	}
 

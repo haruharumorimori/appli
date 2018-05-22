@@ -20,9 +20,13 @@ session.getAttribute("STAR3");
 </head>
 <body>
 <h1>${name}さんの前世は</h1>
-<h1>${name2}</h1><h1>${name3}</h1><br>
+<h1>${name2}${name3}</h1><br>
 <h1>★${STAR2}${STAR3}</h1>
-
+　　　　 ∧＿∧<br>
+　／＼（　・∀・）／ヽ<br>
+（ ●　と　　　つ　● ）<br>
+　＼/⊂、　 　ノ　＼ノ<br>
+　　　　　し’<br>
 <a href="/appli/application/gatcha.jsp">トップへ</a>
 
 <a href="/appli/RecordServlet?record=Logout">ログアウト</a>

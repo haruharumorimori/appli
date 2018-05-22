@@ -29,8 +29,9 @@ public class NewServlet extends HttpServlet {
 		}else {
 			int rows=nd.add(name, pass);
 			HttpSession hs=request.getSession();
-			SD.add(name);
+			int stone=SD.add(name);
 			hs.setAttribute("name", name);
+			request.setAttribute("stone", stone);
 			request.setAttribute("message", "登録完了致しました");
 			RequestDispatcher rd=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
 			rd.forward(request, response);

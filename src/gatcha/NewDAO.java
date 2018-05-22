@@ -15,7 +15,7 @@ public class NewDAO {
 			String user="root";
 			String key="sht30";
 			con=DriverManager.getConnection(url,user,key);
-			String sql="INSERT into user2 (name,pass,STONE) VALUES (?,?,0)";
+			String sql="INSERT into user2 (name,pass,STONE) VALUES (?,?,200)";
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			st.setString(2, pass);
