@@ -10,9 +10,11 @@ public class ReasonDAO {
 	PreparedStatement st=null;
 	public int add1(int num) {
 		connect();
+		//idの数値によって処理を行う箇所を変更
 		String sql="UPDATE reason SET num=num+1 WHERE id=?";
 		try {
 			st=con.prepareStatement(sql);
+			//idの値は引数の値によって変わることを指定
 			st.setInt(1, num);
 			int rows=st.executeUpdate();
 			return rows;

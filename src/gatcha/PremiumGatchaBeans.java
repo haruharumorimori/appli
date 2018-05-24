@@ -4,6 +4,7 @@ public class PremiumGatchaBeans {
 	private String name;
 	private int star;
 	private int id;
+	private String explain;
 	public String getName() {
 		return name;
 	}
@@ -22,6 +23,12 @@ public class PremiumGatchaBeans {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getExplain() {
+		return explain;
+	}
+	public void setExplain(String explain) {
+		this.explain = explain;
+	}
 	PremiumGatchaBeans(){}
 
 	PremiumGatchaBeans(String name,int star){
@@ -34,6 +41,10 @@ public class PremiumGatchaBeans {
 		this.star=star;
 		this.id=id;
 	}
-
+	PremiumGatchaBeans(String name,int star,String explain){
+		this.name=name;
+		this.star=star;
+		this.explain=explain;
+	}
 }
 

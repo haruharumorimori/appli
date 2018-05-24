@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+request.getAttribute("message");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>${message}</h1>
 <form action="/appli/DeleteFormServlet" method="post">
 お名前：<input type="text" name="name"/>
 パスワード：<input type="password" name="pass"/>

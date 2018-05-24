@@ -26,8 +26,8 @@ public class FindDAO {
 				int ID=rs.getInt("id");
 				String NAME=rs.getString("name");
 				int STAR=rs.getInt("star");
-
-				GatchaBeans gb=new GatchaBeans(ID,NAME,STAR);
+				String explain=rs.getString("exprain");
+				GatchaBeans gb=new GatchaBeans(ID,NAME,STAR,explain);
 				al.add(gb);
 			}
 			return al;

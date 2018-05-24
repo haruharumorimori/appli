@@ -46,7 +46,7 @@ public class MasterServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else {
 				//パスワード、名前が違うとき
-				request.setAttribute("message", "パスワードが違います");
+				request.setAttribute("message", "名前またはパスワードが違います");
 				RequestDispatcher rd=request.getRequestDispatcher("/application/Master.jsp");
 				rd.forward(request, response);
 			}

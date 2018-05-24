@@ -35,10 +35,10 @@ public class NewDAO {
 					st.close();
 				if(con!=null)
 					con.close();
-				} catch (SQLException e) {
+			} catch (SQLException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
-				}
+			}
 		}
 	}
 }

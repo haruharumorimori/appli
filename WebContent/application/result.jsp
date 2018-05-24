@@ -11,7 +11,10 @@ if(s==null){
 %>
 <jsp:forward page="/application/gatcha.jsp"/>
 <%} %>
-<%int a=(Integer) request.getAttribute("STAR1"); %>
+<%
+int a=(Integer) request.getAttribute("STAR1");
+request.getAttribute("EXPLAIN1");
+%>
 <% switch(a){
 case 1:
 	message="ざーんねん";
@@ -62,8 +65,10 @@ default:
 <h1><font color="green">${name1}</font></h1>
 <h1><font color="gold">★${STAR1}</font></h1><br>
 
-<h3><font color="black">これが今回の結果です</font></h3>
-
+<h2><font color="black">これが今回の結果です</font></h2>
+<br>
+<h3>ちょっと一言</h3>
+<h3><font color="red">${EXPLAIN1}</font></h3>
 <br>
 <br>
 <a href="/appli/application/record.jsp">記録する方はこちら</a>

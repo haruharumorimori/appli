@@ -8,7 +8,10 @@ String s=(String)request.getAttribute("premiumname1");
 <%if(s==null){ %>
 <jsp:forward page="/application/PremiumGatcha.jsp"/>
 <%} %>
-<%int a=(Integer) request.getAttribute("premiumSTAR1"); %>
+<%
+int a=(Integer) request.getAttribute("premiumSTAR1");
+String e=(String)request.getAttribute("premiumEXPLAIN1");
+%>
 <% switch(a){
 case 1:
 	message="ざーんねん";
@@ -59,14 +62,15 @@ default:
 <h1><font color="green">${premiumname1}</font></h1>
 <h1><font color="gold">★${premiumSTAR1}</font></h1><br>
 
-<h3><font color="black">これが今回の結果です</font></h3>
-
+<h2><font color="black">これが今回の結果です</font></h2><br>
+<h3>ちょっと一言</h3>
+<h3><font color="red"><%=e %></font></h3>
 <br>
 <br>
 <a href="/appli/PremiumrecordedServlet">記録</a><br><br>
 <a href="/appli/PremiumGatchaServlet">もう一度プレミアム</a>
 <br><br>
 <a href="/appli/application/gatcha.jsp">トップへ</a><br><br>
-<a href="/appli/PremiumServlet">ログアウト</a>
+<a href="/appli/PremiumServlet?record=Logout">ログアウト</a>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <%
 if (a==null){
 %>
-<<jsp:forward page="/application/delete.jsp"/>
+<jsp:forward page="/application/delete.jsp"/>
 <%} %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,6 @@ SNOOPY<br>
 　　|―――――|<br>
 　　|―――――|<br>
 ｗｗＷｗｗＷｗＷＷｗ<br>
-<a href="/aapli/application/gatcha.jsp">トップへ</a>
+<a href="/appli/application/gatcha.jsp">トップへ</a>
 </body>
 </html>

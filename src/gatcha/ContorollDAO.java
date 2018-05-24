@@ -11,13 +11,14 @@ public class ContorollDAO {
 	PreparedStatement st=null;
 	ResultSet rs=null;
 
-	public int add(String name,int star) {
+	public int add(String name,int star,String explain) {
 		connect();
-		String sql="INSERT INTO cha(name,star) values(?,?)";
+		String sql="INSERT INTO cha(name,star,exprain) values(?,?,?)";
 		try {
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			st.setInt(2, star);
+			st.setString(3, explain);
 			int rows=st.executeUpdate();
 			return rows;
 		} catch (SQLException e) {
@@ -25,16 +26,17 @@ public class ContorollDAO {
 			e.printStackTrace();
 			return 0;
 		}
-		}
+	}
 
-	public int update(String name,int star,int id) {
+	public int update(String name,int star,String explain,int id) {
 		connect();
-		String sql="UPDATE cha SET name=?,star=? WHERE id=?";
+		String sql="UPDATE cha SET name=?,star=?,exprain=? WHERE id=?";
 		try {
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			st.setInt(2, star);
-			st.setInt(3, id);
+			st.setString(3, explain);
+			st.setInt(4, id);
 			int rows=st.executeUpdate();
 			return rows;
 		} catch (SQLException e) {

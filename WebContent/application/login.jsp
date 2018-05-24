@@ -21,13 +21,13 @@ request.getAttribute("list");
 <br>
 ${message}
 <form action="/appli/ContorollServlet" method="post">
-名前:<input type="text" name="name"/>レアリティ:<input type="number" name="star" maxlength="1"onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/>を増やす
+名前:<input type="text" name="name"/>レアリティ:<input type="number" name="star" maxlength="1"onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/>説明：<input type="text"name="exprain"/>を増やす
 <input type="submit" value="増加"/>
 <input type="hidden" name="action" value="add"/>
 </form>
 <br>
 <form action="/appli/ContorollServlet" method="post">
-ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/> 名前:<input type="text" name="name"/> レアリティ:<input type="number" name="star" maxlength="1"onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/>を更新する
+ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/> 名前:<input type="text" name="name"/> レアリティ:<input type="number" name="star" maxlength="1"onKeyup="this.value=this.value.replace(/[^0-9]+/i,'')"/>説明：<input type="text" name="exprain"/>を更新する
 <input type="submit" value ="更新"/>
 <input type="hidden" name="action" value="update"/>
 </form>
@@ -40,10 +40,10 @@ ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]
 <img src="/appli/imge/job_shitsuji.png"width="180" height="180"/>
 <br><br>
 <table border="1" cellspacing="0">
-<tr><td>ID</td><td>名前</td><td>レアリティ</td></tr>
+<tr><td>ID</td><td>名前</td><td>レアリティ</td><td>説明</td></tr>
 
 <c:forEach items="${list}" var="l">
-<tr><td>${l.id}</td><td>${l.name}</td><td>${l.star}</td></tr>
+<tr><td>${l.id}</td><td>${l.name}</td><td>${l.star}</td><td>${l.explain}</td></tr>
 </c:forEach>
 </table><br><br>
 <a href="/appli/application/gatcha.jsp">ガチャに戻る</a>

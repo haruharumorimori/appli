@@ -12,24 +12,25 @@ public class GatchaDAO {
 	ResultSet rs;
 	Connection con;
 
-	public ArrayList<GatchaBeans> gatcha() throws DAOException{
+	public ArrayList<GatchaBeans> gatcha(int star) throws DAOException{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url="jdbc:mysql://localhost/application?serverTimezone=UTC";
 			String user="root";
 			String pass="sht30";
 			con= DriverManager.getConnection(url,user,pass);
-			String sql="SELECT * from cha";
+			String sql="SELECT * from cha Where star=?";
 
 			st=con.prepareStatement(sql);
+			st.setInt(1, star);
 			rs=st.executeQuery();
 
 			ArrayList<GatchaBeans> al=new ArrayList<GatchaBeans>();
 			while(rs.next()) {
 				String NAME=rs.getString("name");
 				int STAR=rs.getInt("star");
-
-				GatchaBeans gb=new GatchaBeans(NAME,STAR);
+				String explain=rs.getString("exprain");
+				GatchaBeans gb=new GatchaBeans(NAME,STAR,explain);
 				al.add(gb);
 			}
 			return al;

@@ -1,6 +1,7 @@
 package gatcha;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,22 +20,31 @@ public class NewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NewDAO nd=new NewDAO();
-		StoneDAO SD=new StoneDAO();
+		StoneDAO sd=new StoneDAO();
 		String name=request.getParameter("name");
 		String pass=request.getParameter("pass");
-		if(name.equals(null)||pass.equals(null)) {
+		if(name.equals("")||pass.equals("")) {//絵アラー処理
 			request.setAttribute("message", "登録できません");
 			RequestDispatcher rd=request.getRequestDispatcher("/appli/application/premium.jsp");
 			rd.forward(request, response);
 		}else {
+			RecordDAO rd=new RecordDAO();
+			//データベースに登録
 			int rows=nd.add(name, pass);
+			//ArrayListへ格納
+			ArrayList<RecordBean> al=rd.findAll(name, pass);
+			//session作成
 			HttpSession hs=request.getSession();
-			int stone=SD.add(name);
+			//石データ取得
+			int stone=al.get(0).getStone();
+			//sessionスコープに格納
 			hs.setAttribute("name", name);
-			request.setAttribute("stone", stone);
+			hs.setAttribute("pass", pass);
+			hs.setAttribute("stone", stone);
 			request.setAttribute("message", "登録完了致しました");
-			RequestDispatcher rd=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
-			rd.forward(request, response);
+			//射出
+			RequestDispatcher rr=request.getRequestDispatcher("/application/PremiumGatcha.jsp");
+			rr.forward(request, response);
 		}
 	}
 

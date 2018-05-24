@@ -22,6 +22,7 @@ public class PremiumrecordedServlet extends HttpServlet {
 		HttpSession hs=request.getSession();
 		hs.getAttribute("name3");
 		hs.getAttribute("PASS3");
+		hs.getAttribute("EXPLAIN3");
 		RequestDispatcher rd=request.getRequestDispatcher("/application/recorded.jsp");
 		rd.forward(request, response);
 	}

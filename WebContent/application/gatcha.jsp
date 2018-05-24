@@ -23,6 +23,7 @@
 <a href="/appli/application/Master.jsp">管理者はこちら</a>
 <br><br>
 <a href="/appli/application/delete.jsp">退会はコチラ</a>
-
+<br><br>
+<a href="/appli/application/question.jsp">お問い合わせ</a>
 </body>
 </html>

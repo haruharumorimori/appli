@@ -26,22 +26,38 @@ public class gatchaServlet extends HttpServlet {
 		ArrayList<GatchaBeans> al=new ArrayList<GatchaBeans>();
 
 		GatchaDAO gd=new GatchaDAO();
-
+		int w=r.nextInt(200);
+		int x=0;
+		if(0<=w&&w<=5) {
+			x=5;
+		}else if(6<=w&&w<=26) {
+			x=4;
+		}else if(27<=w&&w<=77) {
+			x=3;
+		}else if(78<=w&&w<=148) {
+			x=2;
+		}else if(148<=w&&w<=199){
+			x=1;
+		}else {
+			x=0;
+		}
 		try {
-			al=gd.gatcha( );
+			al=gd.gatcha(x);
 			int a=r.nextInt(al.size());
 
 			al.get(a);
 			String NAME=al.get(a).getName();
 			int STAR=al.get(a).getStar();
-
+			String explain=al.get(a).getExplain();
 			request.setAttribute("name1", NAME);
 			request.setAttribute("STAR1", STAR);
+			request.setAttribute("EXPLAIN1",explain);
 			RequestDispatcher rd=request.getRequestDispatcher("/application/result.jsp");
 			rd.forward(request, response);
 			HttpSession hs=request.getSession();
 			hs.setAttribute("name3", NAME);
 			hs.setAttribute("STAR3", STAR);
+			hs.setAttribute("EXPLAIN3", explain);
 			RequestDispatcher ra=request.getRequestDispatcher("/application/recorded.jsp");
 			ra.forward(request, response);
 		} catch (DAOException e) {

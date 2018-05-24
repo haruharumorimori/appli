@@ -47,29 +47,45 @@ public class PremiumGatchaServlet extends HttpServlet {
 			ra.forward(request, response);
 		}else if(stone>=10) {
 
-			try {//ガチャスタート
-				sd.decrease(name);
-				int STAR=0;
-				String NAME=null;
-				ArrayList<PremiumGatchaBeans> az=pgd.pgatcha();
-				Random r=new Random();
-				int a=r.nextInt(az.size());
-				NAME=az.get(a).getName();
-				STAR=az.get(a).getStar();
-				//排出したものをJSPに飛ばす。
-				request.setAttribute("premiumname1", NAME);
-				request.setAttribute("premiumSTAR1", STAR);
+		try {//ガチャスタート
+			Random r=new Random();
+			sd.decrease(name);
+			int x=r.nextInt(100);
+			int z=0;
+			//★3未満をはじく
+			if(0<=x&&x<=50) {
+				z=3;
+			}else if(51<=x&&x<=87) {
+				z=4;
+			}else if(88<=x&&x<=100) {
+				z=5;
+			}
+			//アレイリストに入れたものを取り出す一連の流れ
+			int STAR=0;
+			String NAME=null;
+			String EXPLAIN=null;
+			ArrayList<PremiumGatchaBeans> az=pgd.pgatcha(z);
+			int a=r.nextInt(az.size());
+			NAME=az.get(a).getName();
+			STAR=az.get(a).getStar();
+			EXPLAIN=az.get(a).getExplain();
 
-				RequestDispatcher sa=request.getRequestDispatcher("/application/PremiumGatchaResult.jsp");
-				sa.forward(request, response);
-				hs.setAttribute("name3", NAME);
-				hs.setAttribute("STAR3",STAR);
-				RequestDispatcher rs=request.getRequestDispatcher("/application/recorded.jsp");
-				rs.forward(request, response);
-			} catch (DAOException e) {
+			//排出したものをJSPに飛ばす。
+			request.setAttribute("premiumname1", NAME);
+			request.setAttribute("premiumSTAR1", STAR);
+			request.setAttribute("premiumEXPLAIN1", EXPLAIN);
+
+			RequestDispatcher sa=request.getRequestDispatcher("/application/PremiumGatchaResult.jsp");
+			sa.forward(request, response);
+			hs.setAttribute("name3", NAME);
+			hs.setAttribute("STAR3",STAR);
+			hs.setAttribute("EXPLAIN3", EXPLAIN);
+			RequestDispatcher rs=request.getRequestDispatcher("/application/recorded.jsp");
+			rs.forward(request, response);
+		} catch (DAOException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
-			}
+		}
 	}
 }
 

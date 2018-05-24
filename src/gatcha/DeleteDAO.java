@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DeleteDAO {
- public int delete(String name,String pass) {
+ public int delete(String name,String pass)  {
 	 Connection con=null;
 	 PreparedStatement st=null;
 	 try {
