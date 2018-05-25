@@ -12,18 +12,20 @@ public class MasterDAO {
 	ResultSet rs=null;
 	Connection con;
 	public ArrayList<MasterBean> findALL(String name,String pass){
-		try {
+		try {//SQL接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url="jdbc:mysql://localhost/sample2?serverTimezone=UTC";
 			String user="student";
 			String pa="himitu";
 			con=DriverManager.getConnection(url,user,pa);
+			//SQLに命令
 			String sql="SELECT * FROM user WHERE name=? AND pass=?";
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			st.setString(2, pass);
 
 			rs=st.executeQuery();
+			//リスト生成
 			ArrayList<MasterBean> al=new ArrayList<MasterBean>();
 
 			while(rs.next()) {//データべース情報をアレイリストに格納

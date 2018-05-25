@@ -39,6 +39,7 @@ ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]
 </form>
 <img src="/appli/imge/job_shitsuji.png"width="180" height="180"/>
 <br><br>
+<h3>キャラクターリスト</h3>
 <table border="1" cellspacing="0">
 <tr><td>ID</td><td>名前</td><td>レアリティ</td><td>説明</td></tr>
 
@@ -46,6 +47,15 @@ ID:<input type="number" name="id" onKeyup="this.value=this.value.replace(/[^0-9]
 <tr><td>${l.id}</td><td>${l.name}</td><td>${l.star}</td><td>${l.explain}</td></tr>
 </c:forEach>
 </table><br><br>
+<h3>未確認のお問い合わせ</h3>
+<table border="1" cellspacing="0">
+<tr><td>ニックネーム</td><td>お問い合わせ</td>
+<c:forEach items="${questionlist }" var="q">
+<tr><td>${q.name }</td><td>${q.question}</td></tr>
+</c:forEach>
+</table><br><br>
+<a href="/appli/QuestionlistServlet">確認済みのお問い合わせ</a>
+<br><br>
 <a href="/appli/application/gatcha.jsp">ガチャに戻る</a>
 <br><br>
 <a href="/appli/MasterServlet?log=logout">ログアウトはこちら</a>

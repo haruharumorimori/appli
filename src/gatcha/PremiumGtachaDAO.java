@@ -36,7 +36,7 @@ public class PremiumGtachaDAO {
 				al.add(gb);
 			}
 			return al;
-		}catch (SQLException e) {
+		}catch (SQLException e) {//以下エラー処理
 			e.printStackTrace();
 			return null;
 		} catch (Exception e) {

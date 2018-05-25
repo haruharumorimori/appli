@@ -30,6 +30,7 @@ public class PremiumServlet extends HttpServlet {
 		String PASS=null;
 		StoneDAO sd=new StoneDAO();
 		RecordDAO rd=new RecordDAO();
+		////分岐
 		if(record.equals("login")) {
 			//パラメータ取得とともにデータベースと照合
 			String name=request.getParameter("name");
@@ -55,7 +56,7 @@ public class PremiumServlet extends HttpServlet {
 				RequestDispatcher rp=request.getRequestDispatcher("/application/premium.jsp");
 				rp.forward(request, response);
 			}
-		}else if(record.equals("Logout")) {
+		}else if(record.equals("Logout")) {//ログアウト
 			HttpSession hs=request.getSession(false);
 			if(hs==null) {
 				request.setAttribute("message", "ログアウトしました");

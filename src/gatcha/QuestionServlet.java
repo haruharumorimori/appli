@@ -8,23 +8,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class PremiumrecordedServlet
+ * Servlet implementation class QuestionServlet
  */
-@WebServlet("/PremiumrecordedServlet")
-public class PremiumrecordedServlet extends HttpServlet {
+@WebServlet("/QuestionServlet")
+public class QuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//セッション生成(記録用）
-		HttpSession hs=request.getSession();
-		hs.getAttribute("name3");
-		hs.getAttribute("PASS3");
-		hs.getAttribute("EXPLAIN3");
-		RequestDispatcher rd=request.getRequestDispatcher("/application/recorded.jsp");
+		//文字化け阻止
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		//パラメータ取得
+		String question=request.getParameter("question");
+		String name=request.getParameter("name");
+		QuestionDAO qd=new QuestionDAO();
+		//リストに追加
+		int rows=qd.add(question, name);
+		//表示メッセージ作成＆送信
+		request.setAttribute("message", "お問い合わせ承りました。ご利用ありがとうございました。");
+		RequestDispatcher rd=request.getRequestDispatcher("/application/questionresult.jsp");
 		rd.forward(request, response);
 	}
 

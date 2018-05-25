@@ -15,16 +15,17 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/MasterServlet")
 public class MasterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	QuestionDAO qd=new QuestionDAO();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String log=request.getParameter("log");
 		FindDAO fd=new FindDAO();
+
 		if(log.equals("login")) {
 			//パラメータ取得
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
-			//初期化（インスタンス変数にすればしなくてよかったので間抜け）
+			//初期化
 			String NAME=null;
 			String PASS=null;
 			MasterDAO md=new MasterDAO();
@@ -39,11 +40,23 @@ public class MasterServlet extends HttpServlet {
 			if(name.equals(NAME)&&pass.equals(PASS)) {
 				//セッション処理
 				HttpSession hs=request.getSession();
+				hs.setAttribute("PASS", PASS);
 				hs.setAttribute("NAME", NAME);
 				ArrayList<GatchaBeans> ad=fd.findAll();
 				request.setAttribute("list", ad);
+				//お問い合わせ確認
+				ArrayList<QuestionBeans> q=qd.select();
+					request.setAttribute("questionlist",q);
+
 				RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 				rd.forward(request, response);
+				//お問い合わせ処理
+				for(QuestionBeans z:q) {
+					String question=z.getQuestion();
+					String user=z.getName();
+					qd.add2(question, user);
+					qd.delete(user);
+				}
 			}else {
 				//パスワード、名前が違うとき
 				request.setAttribute("message", "名前またはパスワードが違います");
@@ -65,6 +78,7 @@ public class MasterServlet extends HttpServlet {
 			}
 		}
 	}
+
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

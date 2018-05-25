@@ -9,19 +9,20 @@ public class NewDAO {
 	public int add(String name,String pass) {
 		Connection con=null;
 		PreparedStatement st=null;
-		try {
+		try {//SQL接続
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url="jdbc:mysql://localhost/sample2?serverTimezone=UTC";
 			String user="root";
 			String key="sht30";
 			con=DriverManager.getConnection(url,user,key);
+			//命令
 			String sql="INSERT into user2 (name,pass,STONE) VALUES (?,?,200)";
 			st=con.prepareStatement(sql);
 			st.setString(1, name);
 			st.setString(2, pass);
 			int rows=st.executeUpdate();
 			return rows;
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {//以下エラー処理
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return 0;

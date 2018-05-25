@@ -19,11 +19,12 @@ public class NewServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//下準備
 		NewDAO nd=new NewDAO();
 		StoneDAO sd=new StoneDAO();
 		String name=request.getParameter("name");
 		String pass=request.getParameter("pass");
-		if(name.equals("")||pass.equals("")) {//絵アラー処理
+		if(name.equals("")||pass.equals("")) {//エラー処理
 			request.setAttribute("message", "登録できません");
 			RequestDispatcher rd=request.getRequestDispatcher("/appli/application/premium.jsp");
 			rd.forward(request, response);

@@ -12,7 +12,9 @@ public class ContorollDAO {
 	ResultSet rs=null;
 
 	public int add(String name,int star,String explain) {
+		//SQL接続
 		connect();
+		//SQL命令
 		String sql="INSERT INTO cha(name,star,exprain) values(?,?,?)";
 		try {
 			st=con.prepareStatement(sql);
@@ -27,9 +29,11 @@ public class ContorollDAO {
 			return 0;
 		}
 	}
-
+	//キャラ追加用
 	public int update(String name,int star,String explain,int id) {
+		//SQL接続
 		connect();
+		//SQL命令
 		String sql="UPDATE cha SET name=?,star=?,exprain=? WHERE id=?";
 		try {
 			st=con.prepareStatement(sql);
@@ -46,6 +50,7 @@ public class ContorollDAO {
 		}
 	}
 
+	//キャラ削除用
 	public int delete(int id) {
 		connect();
 		String sql="DELETE FROM cha WHERE id=?";
@@ -61,6 +66,7 @@ public class ContorollDAO {
 			return 0;
 		}
 	}
+	//SQL接続メソッド
 	public void connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

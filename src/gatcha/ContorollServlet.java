@@ -24,19 +24,21 @@ public class ContorollServlet extends HttpServlet {
 		//パラメータ取得
 		String action=request.getParameter("action");
 		//パラメータによる分岐その１
-		if(action.equals("add")) {
+		if(action.equals("add")) {//キャラ追加
+			//初期化
 			String name=null;
 			String star=null;
 			String explain=null;
 			int s=0;
+			//パラメータ取得
 			name=request.getParameter("name");
 			star=request.getParameter("star");
 			explain=request.getParameter("exprain");
-			try{
+			try{//int型へキャスト
 				s=Integer.parseInt(star);
-
+				//キャラをデータベースに追加
 				int rows=cd.add(name, s,explain);
-				if(rows!=0) {
+				if(rows!=0) {//エラー処理
 					request.setAttribute("message", rows+"件追加いたしました");
 					ArrayList<GatchaBeans> ad=fd.findAll();
 
@@ -54,12 +56,13 @@ public class ContorollServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		//分岐その２
-		}else if(action.equals("update")) {
+		}else if(action.equals("update")) {//キャラ追加用
 			//各種パラメータ取得
 			String ID=request.getParameter("id");
 			String name=request.getParameter("name");
 			String star=request.getParameter("star");
 			String explain=request.getParameter("exprain");
+			//ローカル変数により初期化
 			int s=0;
 			int id=0;
 			try{
@@ -86,7 +89,7 @@ public class ContorollServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		//分岐その3
-		}else if(action.equals("delete")){
+		}else if(action.equals("delete")){//キャラ削除用
 			String id=request.getParameter("id");
 			int s=0;
 			try{

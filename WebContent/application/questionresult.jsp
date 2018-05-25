@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String message=(String)request.getAttribute("message");
+%>
+<%if(message==null){ %>
+<jsp:forward page="/application/question.jsp"/>
+<%} %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/appli/QuestionServlet" method="post">
-ニックネーム<br>
-<input type="text" name="name"/><br>
-お問い合わせ内容<br>
-<textarea name="question" cols="50" rows="10"></textarea><br>
-<input type="submit" value="送信"/>
-</form>
+<h1>${message}</h1>
+<br><br><br>
+<a href="/appli/application/gatcha.jsp">トップへ</a>
 </body>
 </html>

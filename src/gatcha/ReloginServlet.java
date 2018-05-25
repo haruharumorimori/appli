@@ -1,6 +1,7 @@
 package gatcha;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,23 +9,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class PremiumrecordedServlet
+ * Servlet implementation class ReloginServlet
  */
-@WebServlet("/PremiumrecordedServlet")
-public class PremiumrecordedServlet extends HttpServlet {
+@WebServlet("/ReloginServlet")
+public class ReloginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//セッション生成(記録用）
-		HttpSession hs=request.getSession();
-		hs.getAttribute("name3");
-		hs.getAttribute("PASS3");
-		hs.getAttribute("EXPLAIN3");
-		RequestDispatcher rd=request.getRequestDispatcher("/application/recorded.jsp");
+		//確認済み問い合わせ画面から戻るときの表示用
+		FindDAO fd=new FindDAO();
+		ArrayList<GatchaBeans> ad=fd.findAll();
+		request.setAttribute("list", ad);
+		QuestionDAO qd=new QuestionDAO();
+		ArrayList<QuestionBeans> q=qd.select();
+		request.setAttribute("questionlist",q);
+		RequestDispatcher rd=request.getRequestDispatcher("/application/login.jsp");
 		rd.forward(request, response);
 	}
 

@@ -27,8 +27,10 @@ public class DeleteFormServlet extends HttpServlet {
 		try {//パラメータ取得
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
-			if(name!=""&&pass!="") {
+			if(name!=""&&pass!="") {//エラー処理
+				//ラジオボタンパラメータ取得
 				String reason=request.getParameter("reason");
+				//選んだボタンによってreasonのvalueが変化
 				int id=0;
 				switch(reason) {
 					case "a":
@@ -44,9 +46,12 @@ public class DeleteFormServlet extends HttpServlet {
 						id=4;
 						break;
 					}
+				
 				ReasonDAO rd= new ReasonDAO();
+				//アカウント消去
 				int rows2=dd.delete(name, pass);
-				if (rows2!=0) {
+				if (rows2!=0) {//エラー処理
+					//アンケート集計
 					int rows1=rd.add1(id);
 					request.setAttribute("message", "退会致しました。ご利用ありがとうございました。");
 					RequestDispatcher rr=request.getRequestDispatcher("/application/deleteresult.jsp");
@@ -56,12 +61,13 @@ public class DeleteFormServlet extends HttpServlet {
 						RequestDispatcher re=request.getRequestDispatcher("/application/delete.jsp");
 						re.forward(request, response);
 				}
-			}else{
+				
+			}else{//エラー処理
 				request.setAttribute("message","Errorです");
 				RequestDispatcher re=request.getRequestDispatcher("/application/delete.jsp");
 				re.forward(request, response);
 			}
-		}catch(NullPointerException e) {
+		}catch(NullPointerException e) {//NullPointerException対策
 			request.setAttribute("message","Errorです");
 			RequestDispatcher re=request.getRequestDispatcher("/application/delete.jsp");
 			re.forward(request, response);
