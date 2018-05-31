@@ -25,7 +25,7 @@ public class MasterServlet extends HttpServlet {
 			//パラメータ取得
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
-			//初期化
+			//初期化とインスタンス化
 			String NAME=null;
 			String PASS=null;
 			MasterDAO md=new MasterDAO();

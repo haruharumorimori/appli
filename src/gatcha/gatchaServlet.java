@@ -45,11 +45,11 @@ public class gatchaServlet extends HttpServlet {
 		}
 		//ガチャスタート
 		try {
-			//リスト作成
+			//リストに格納
 			al=gd.gatcha(x);
 			//乱数生成
 			int a=r.nextInt(al.size());
-			//リストに格納
+			//リストから抽出
 			al.get(a);
 			//データ取得
 			String NAME=al.get(a).getName();

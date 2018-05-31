@@ -21,9 +21,9 @@ public class MasterDAO {
 			//SQLに命令
 			String sql="SELECT * FROM user WHERE name=? AND pass=?";
 			st=con.prepareStatement(sql);
+			//実行
 			st.setString(1, name);
 			st.setString(2, pass);
-
 			rs=st.executeQuery();
 			//リスト生成
 			ArrayList<MasterBean> al=new ArrayList<MasterBean>();
@@ -57,6 +57,5 @@ public class MasterDAO {
 				}
 			}
 		}
-
 	}
 }

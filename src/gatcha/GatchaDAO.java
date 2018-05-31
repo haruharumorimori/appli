@@ -22,7 +22,7 @@ public class GatchaDAO {
 			con= DriverManager.getConnection(url,user,pass);
 			//SQLに命令
 			String sql="SELECT * from cha Where star=?";
-
+			//実行
 			st=con.prepareStatement(sql);
 			st.setInt(1, star);
 			rs=st.executeQuery();
